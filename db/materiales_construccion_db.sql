@@ -30,16 +30,15 @@ INSERT INTO revestimientos (nombre_revestimiento, tipo, precio) VALUES
 ('Mármol Italiano', 'Mármol', 290000),
 ('Piedra Natural', 'Piedra', 350000);
 
-
 -- Crear la tabla de porcelana sanitaria
 CREATE TABLE porcelana_sanitaria(
     id_porcelana INT auto_increment PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
+    nombre_porcelana VARCHAR(100) NOT NULL,
     tipo VARCHAR(50) NOT NULL,
     precio bigint NOT NULL
 );
 
-INSERT INTO porcelana_sanitaria (nombre, tipo, precio) VALUES 
+INSERT INTO porcelana_sanitaria (nombre_porcelana, tipo, precio) VALUES 
 ('Lavabo Circular', 'Lavabo', 400000),
 ('Inodoro Compacto', 'Inodoro', 500000),
 ('Bidé Clásico', 'Bidé', 450000),
