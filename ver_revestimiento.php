@@ -92,14 +92,14 @@ function obtener_revestimiento($conn, $id_revestimiento)
                         <td><?php echo $revestimiento['precio']; ?></td>
                     </tr>
                 </table>
-                <a href="crud_revestimientos.php" class="btn btn-primary">
+                <a href="crud_revestimientos.php" class="btn btn-danger">
                     <i class="fas fa-arrow-left"></i> Volver a Revestimientos
                 </a>
             <?php else : ?>
                 <div class="alert alert-warning" role="alert">
                     No se encontraron datos.
                 </div>
-                <a href="crud_revestimientos.php" class="btn btn-primary">
+                <a href="crud_revestimientos.php" class="btn btn-danger">
                     <i class="fas fa-arrow-left"></i> Volver a Revestimientos
                 </a>
             <?php endif; ?>

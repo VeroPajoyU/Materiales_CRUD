@@ -11,6 +11,17 @@ if (!isset($_SESSION['id_usuario'])) {
 }
 
 $error = null;
+// Obtener el id por el método get
+$id_revestimiento = $_GET['id'];
+
+// Identificación del revestimiento a editar
+function obtener_revestimiento($conn, $id_revestimiento)
+{
+    //Consulta para obtener los datos del revestimiento
+    $sql = "SELECT * FROM revestimientos WHERE id_revestimiento = $id_revestimiento";
+    $resultado = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($resultado);
+}
 
 // Procesar el formulario si se ha enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -20,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $precio = $_POST['precio'];
 
     // Insertar los datos en la base de datos
-    $sql = "INSERT INTO revestimientos (nombre_revestimiento, tipo, precio) VALUES ('$nombre_revestimiento', '$tipo', $precio)";
+    $sql = "UPDATE revestimientos SET nombre_revestimiento = '$nombre_revestimiento', tipo = '$tipo', precio = $precio WHERE id_revestimiento = $id_revestimiento";
     $resultado = mysqli_query($conn, $sql);
 
     // Valido la creación del revestimiento
@@ -41,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CREAR REVESTIMIENTO</title>
+    <title>EDITAR REVESTIMIENTO</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -75,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </nav>
         <div class="mt-4">
             <section class="d-flex justify-content-center">
-                <h1><strong>Crear Nuevo Revestimiento</strong></h1>
+                <h1><strong>Editar Revestimiento</strong></h1>
             </section>
             <?php if ($error) : ?>
                 <!-- Mostrar mensaje de error si hay uno -->
@@ -83,21 +94,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php echo $error; ?>
                 </div>
             <?php endif; ?>
+            <?php
+            // Obtener los datos del revestimiento
+            $revestimiento = obtener_revestimiento($conn, $id_revestimiento);
+            ?>
             <hr>
             <form method="post">
                 <div class="mb-3">
                     <label for="nombre_revestimiento" class="form-label">Nombre del revestimiento</label>
-                    <input type="text" class="form-control" id="nombre_revestimiento" name="nombre_revestimiento" required>
+                    <input type="text" class="form-control" id="nombre_revestimiento" name="nombre_revestimiento" value="<?php echo htmlspecialchars($revestimiento['nombre_revestimiento']) ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="tipo" class="form-label">Tipo</label>
-                    <input type="text" class="form-control" id="tipo" name="tipo" required>
+                    <input type="text" class="form-control" id="tipo" name="tipo" value="<?php echo htmlspecialchars($revestimiento['tipo']) ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="precio" class="form-label">Precio</label>
-                    <input type="number" class="form-control" id="precio" name="precio" required>
+                    <input type="number" class="form-control" id="precio" name="precio" value="<?php echo htmlspecialchars($revestimiento['precio']) ?>" required>
                 </div>
-                <button type="submit" class="btn btn-success">Crear Revestimiento</button>
+                <button type="submit" class="btn btn-success">Editar Revestimiento</button>
                 <a href="crud_revestimientos.php" class="btn btn-danger">
                     <i class="fas fa-arrow-left"></i> Volver a Revestimientos
                 </a>
