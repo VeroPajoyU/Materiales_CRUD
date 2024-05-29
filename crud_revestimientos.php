@@ -82,37 +82,36 @@ function obtener_revestimientos($conn)
             if (mysqli_num_rows($revestimientos) > 0) :
             ?>
                 <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre del Revestimiento</th>
-                            <th>Tipo</th>
-                            <th>Precio</th>
-                            <th>Acciones</th>
+                    <theadtr>
+                        <th>ID</th>
+                        <th>Nombre del Revestimiento</th>
+                        <th>Tipo</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Iterar sobre los pedidos y mostrarlos en la tabla -->
-                        <?php while ($revestimiento = mysqli_fetch_assoc($revestimientos)) : ?>
-                            <tr>
-                                <td><?php echo $revestimiento['id_revestimiento']; ?></td>
-                                <td><?php echo $revestimiento['nombre_revestimiento']; ?></td>
-                                <td><?php echo $revestimiento['tipo']; ?></td>
-                                <td><?php echo $revestimiento['precio']; ?></td>
-                                <td>
-                                    <a href="ver_revestimiento.php?id=<?php echo $revestimiento['id_revestimiento']; ?>" class="btn btn-info btn-sm">
-                                        <i class="fas fa-eye"></i> Ver
-                                    </a>
-                                    <a href="editar_revestimiento.php?id=<?php echo $revestimiento['id_revestimiento']; ?>" class="btn btn-warning btn-sm">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
-                                    <a href="eliminar_revestimiento.php?id=<?php echo $pedido['pedido_id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este revestimiento?');">
-                                        <i class="fas fa-trash"></i> Eliminar
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
+                        </thead>
+                        <tbody>
+                            <!-- Iterar sobre los pedidos y mostrarlos en la tabla -->
+                            <?php while ($revestimiento = mysqli_fetch_assoc($revestimientos)) : ?>
+                                <tr>
+                                    <td><?php echo $revestimiento['id_revestimiento']; ?></td>
+                                    <td><?php echo $revestimiento['nombre_revestimiento']; ?></td>
+                                    <td><?php echo $revestimiento['tipo']; ?></td>
+                                    <td><?php echo $revestimiento['precio']; ?></td>
+                                    <td>
+                                        <a href="ver_revestimiento.php?id=<?php echo $revestimiento['id_revestimiento']; ?>" class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"></i> Ver
+                                        </a>
+                                        <a href="editar_revestimiento.php?id=<?php echo $revestimiento['id_revestimiento']; ?>" class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+                                        <a href="eliminar_revestimiento.php?id=<?php echo $revestimiento['id_revestimiento']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este revestimiento?');">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
                 </table>
             <?php else : ?>
                 <p>No se encuentran registros de los revestimientos.</p>

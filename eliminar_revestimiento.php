@@ -18,5 +18,11 @@ $id_revestimiento = $_GET['id'];
 $sql = "DELETE FROM revestimientos WHERE id_revestimiento = $id_revestimiento";
 $resultado = mysqli_query($conn, $sql);
 
-// Redirigir a la página de revestimientos
-header('Location: crud_revestimientos.php');
+// Verificar si se eliminó correctamente
+if ($resultado) {
+    header('Location: crud_revestimientos.php');
+    exit;
+} else {
+    echo "Error al eliminar el revestimiento";
+    exit;
+}
