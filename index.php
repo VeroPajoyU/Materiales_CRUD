@@ -78,12 +78,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <a class="nav-link" href="crud_revestimientos.php">Revestimientos</a>
                             </li>
                         </ul>
-                        <section class="d-flex justify-content-end">
-                            <a href="cerrar_sesion.php" class="btn btn-danger btn-sm">
-                                <i class="fas fa-sign-out-alt"></i> Salir
-                            </a>
-                        </section>
                     </div>
+                    <section class="d-flex justify-content-end">
+                        <a href="cerrar_sesion.php" class="btn btn-danger btn-sm">
+                            <i class="fas fa-sign-out-alt"></i> Salir
+                        </a>
+                    </section>
                 </div>
             </nav>
             <div id="home" class="mt-4">
