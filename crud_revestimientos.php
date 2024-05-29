@@ -69,7 +69,7 @@ function obtener_revestimientos($conn)
                 <h1><strong>Revestimientos</strong></h1>
             </section>
             <section class="d-flex justify-content-end">
-                <a href="agregar_revestimiento.php" class="btn btn-success">
+                <a href="crear_revestimiento.php" class="btn btn-success">
                     <i class="fas fa-plus"></i> Agregar Revestimiento
                 </a>
             </section>

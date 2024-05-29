@@ -65,16 +65,6 @@ function obtener_revestimiento($conn, $id_revestimiento)
             </div>
         </nav>
         <div class="mt-4">
-            <section class="d-flex justify-content-center">
-                <h1><strong>Revestimientos</strong></h1>
-            </section>
-            <section class="d-flex justify-content-end">
-                <a href="agregar_revestimiento.php" class="btn btn-success">
-                    <i class="fas fa-plus"></i> Agregar Revestimiento
-                </a>
-            </section>
-        </div>
-        <div class="mt-4">
             <?php
             // Obtener el id por el método get
             $id_revestimiento = $_GET['id'];
@@ -109,6 +99,9 @@ function obtener_revestimiento($conn, $id_revestimiento)
                 <div class="alert alert-warning" role="alert">
                     No se encontraron datos.
                 </div>
+                <a href="crud_revestimientos.php" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i> Volver a Revestimientos
+                </a>
             <?php endif; ?>
         </div>
     </div>
