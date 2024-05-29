@@ -1,22 +1,22 @@
 <?php
-    // Incluir la conexión a la base de datos
-    include 'conexion.php';
+// Incluir la conexión a la base de datos
+include 'conexion.php';
 
-    // Verificar si el usuario ha iniciado sesión
-    session_start();
-    if (!isset($_SESSION['id_usuario'])){
-        // Si no ha iniciado sesión, redirigir a la página de iniciio de sesión
-        header('Location: index.php');
-        exit;
-    }
+// Verificar si el usuario ha iniciado sesión
+session_start();
+if (!isset($_SESSION['id_usuario'])) {
+    // Si no ha iniciado sesión, redirigir a la página de iniciio de sesión
+    header('Location: index.php');
+    exit;
+}
 
-    // FUNCIÓN PARA OBTENER LOS DATOS DE LAS PORCELANAS
-    function obtener_porcelana($conn)
-    {
-        // Consulta para obtener los datos de las porcelanas
-        $sql = "SELECT * FROM porcelana_sanitaria";
-        return mysqli_query($conn, $sql);
-    }
+// FUNCIÓN PARA OBTENER LOS DATOS DE LAS PORCELANAS
+function obtener_porcelana($conn)
+{
+    // Consulta para obtener los datos de las porcelanas
+    $sql = "SELECT * FROM porcelana_sanitaria";
+    return mysqli_query($conn, $sql);
+}
 ?>
 
 <!-- CREACIÓN DE LA PARTE VISUAL DEL CRUD DE PORCELANAS CON HTML5 Y BOOTSTRAP 5 -->
@@ -55,12 +55,12 @@
                             <a class="nav-link" href="crud_revestimientos.php">Revestimientos</a>
                         </li>
                     </ul>
-                    <section class="d-flex justify-content-end">
-                        <a href="cerrar_sesion.php" class="btn btn-danger btn-sm">
-                            <i class="fas fa-sign-out-alt"></i> Salir
-                        </a>
-                    </section>
                 </div>
+                <section class="d-flex justify-content-end">
+                    <a href="cerrar_sesion.php" class="btn btn-danger btn-sm">
+                        <i class="fas fa-sign-out-alt"></i> Salir
+                    </a>
+                </section>
             </div>
         </nav>
         <div class="mt-4">
@@ -75,48 +75,48 @@
         </div>
         <div class="mt-4">
             <?php
-                // Obtener los datos de porcelanas
-                $porcelanas = obtener_porcelana($conn);
-                // Validar si llegan datos
-                if (mysqli_num_rows($porcelanas) > 0):
+            // Obtener los datos de porcelanas
+            $porcelanas = obtener_porcelana($conn);
+            // Validar si llegan datos
+            if (mysqli_num_rows($porcelanas) > 0) :
             ?>
 
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre de la Porcelana</th>
-                        <th>Tipop</th>
-                        <th>Precio</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Iterar sobre los porcelana y mostrarlos en la tabla -->
-                    <?php while ($porcelana = mysqli_fetch_assoc($porcelanas)): ?>
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td><?php echo $porcelana['id_porcelana']; ?></td>
-                            <td><?php echo $porcelana['nombre_porcelana']; ?></td>
-                            <td><?php echo $porcelana['tipo']; ?></td>
-                            <td><?php echo $porcelana['precio']; ?></td>
-                            <td>
-                                <a href="ver_porcelana.php?id=<?php echo $porcelana['id_porcelana']; ?>" class="btn btn-info btn-sm">
-                                    <i class="fas fa-eye"></i> Ver
-                                </a>
-                                <a href="editar_porcelana.php?id=<?php echo $porcelana['id_porcelana']; ?>" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i> Editar
-                                </a>
-                                <a href="eliminar_porcelana.php?id=<?php echo $porcelana['id_porcelana']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar esta porcelana?');">
-                                    <i class="fas fa-trash"></i> Eliminar
-                                </a>
-                            </td>
+                            <th>ID</th>
+                            <th>Nombre de la Porcelana</th>
+                            <th>Tipop</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
                         </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
-            <?php else: ?>
-            <p>No hay registros</p>
-            <?php endif; ?>            
+                    </thead>
+                    <tbody>
+                        <!-- Iterar sobre los porcelana y mostrarlos en la tabla -->
+                        <?php while ($porcelana = mysqli_fetch_assoc($porcelanas)) : ?>
+                            <tr>
+                                <td><?php echo $porcelana['id_porcelana']; ?></td>
+                                <td><?php echo $porcelana['nombre_porcelana']; ?></td>
+                                <td><?php echo $porcelana['tipo']; ?></td>
+                                <td><?php echo $porcelana['precio']; ?></td>
+                                <td>
+                                    <a href="ver_porcelana.php?id=<?php echo $porcelana['id_porcelana']; ?>" class="btn btn-info btn-sm">
+                                        <i class="fas fa-eye"></i> Ver
+                                    </a>
+                                    <a href="editar_porcelana.php?id=<?php echo $porcelana['id_porcelana']; ?>" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </a>
+                                    <a href="eliminar_porcelana.php?id=<?php echo $porcelana['id_porcelana']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar esta porcelana?');">
+                                        <i class="fas fa-trash"></i> Eliminar
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            <?php else : ?>
+                <p>No hay registros</p>
+            <?php endif; ?>
         </div>
     </div>
     <!-- JS DE BOOTSTRAP 5 -->
