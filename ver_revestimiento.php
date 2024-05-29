@@ -1,4 +1,3 @@
-<!-- SCRIPT PHP PARA EL CORRECTO FUNCIONAMIENTO DEL CRUD DE REVESTIMIENTOS -->
 <?php
 // Incluir la conexión a la base de datos
 include 'conexion.php';
@@ -11,12 +10,13 @@ if (!isset($_SESSION['id_usuario'])) {
     exit;
 }
 
-// FUNCION PARA OBTENER LOS DATOS DE LOS REVESTIMIENTOS
-function obtener_revestimientos($conn)
+// Función para obtener los datos del revestimiento por la id
+function obtener_revestimiento($conn, $id_revestimiento)
 {
-    // Consulta para obtener los datos de los revestimientos
-    $sql = "SELECT * FROM revestimientos";
-    return mysqli_query($conn, $sql);
+    //Consulta para obtener los datos del revestimiento
+    $sql = "SELECT * FROM revestimientos WHERE id_revestimiento = $id_revestimiento";
+    $resultado = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($resultado);
 }
 ?>
 
@@ -29,7 +29,7 @@ function obtener_revestimientos($conn)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Yisel Verónica Pajoy Maca y Jhon Eduar Perafan">
     <meta name="description" content="CRUD de materiales para la asignatura Modelamiento de bases de datos">
-    <title>REVESTIMIENTOS</title>
+    <title>VER REVESTIMIENTO</title>
     <!-- HOJAS DE ESTILO DE BOOTSTRAP 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- ICONOS -->
@@ -76,46 +76,39 @@ function obtener_revestimientos($conn)
         </div>
         <div class="mt-4">
             <?php
+            // Obtener el id por el método get
+            $id_revestimiento = $_GET['id'];
             // Obtener los datos de los revestimientos
-            $revestimientos = obtener_revestimientos($conn);
+            $revestimiento = obtener_revestimiento($conn, $id_revestimiento);
             // Valido si llegan datos
-            if (mysqli_num_rows($revestimientos) > 0) :
+            if ($revestimiento) :
             ?>
+                <h2><strong>Detalles del Revestimiento</strong></h2>
                 <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre del Revestimiento</th>
-                            <th>Tipo</th>
-                            <th>Precio</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Iterar sobre los pedidos y mostrarlos en la tabla -->
-                        <?php while ($revestimiento = mysqli_fetch_assoc($revestimientos)) : ?>
-                            <tr>
-                                <td><?php echo $revestimiento['id_revestimiento']; ?></td>
-                                <td><?php echo $revestimiento['nombre_revestimiento']; ?></td>
-                                <td><?php echo $revestimiento['tipo']; ?></td>
-                                <td><?php echo $revestimiento['precio']; ?></td>
-                                <td>
-                                    <a href="ver_revestimiento.php?id=<?php echo $revestimiento['id_revestimiento']; ?>" class="btn btn-info btn-sm">
-                                        <i class="fas fa-eye"></i> Ver
-                                    </a>
-                                    <a href="editar_pedido.php?id=<?php echo $revestimiento['id_revestimiento']; ?>" class="btn btn-warning btn-sm">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
-                                    <a href="eliminar_pedido.php?id=<?php echo $revestimiento['id_revestimiento']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este revestimiento?');">
-                                        <i class="fas fa-trash"></i> Eliminar
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
+                    <tr>
+                        <th>ID del Revestimiento</th>
+                        <td><?php echo $revestimiento['id_revestimiento']; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Nombre del Revestimiento</th>
+                        <td><?php echo $revestimiento['nombre_revestimiento']; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Tipo</th>
+                        <td><?php echo $revestimiento['tipo']; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Precio</th>
+                        <td><?php echo $revestimiento['precio']; ?></td>
+                    </tr>
                 </table>
+                <a href="crud_revestimientos.php" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i> Volver a Revestimientos
+                </a>
             <?php else : ?>
-                <p>No se encuentran registros de los revestimientos.</p>
+                <div class="alert alert-warning" role="alert">
+                    No se encontraron datos.
+                </div>
             <?php endif; ?>
         </div>
     </div>
