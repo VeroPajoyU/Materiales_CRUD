@@ -2,7 +2,7 @@
 <?php
 $host_name = "localhost";
 $user_name = "root";
-$password = ""; //COLOCAR 1234 DE CONTRASEÑA
+$password = "1234"; //COLOCAR 1234 DE CONTRASEÑA
 $database = "materiales_construccion_db";
 
 // Crea la conexión
