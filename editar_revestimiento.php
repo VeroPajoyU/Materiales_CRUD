@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "UPDATE revestimientos SET nombre_revestimiento = '$nombre_revestimiento', tipo = '$tipo', precio = $precio WHERE id_revestimiento = $id_revestimiento";
     $resultado = mysqli_query($conn, $sql);
 
-    // Valido la creación del revestimiento
+    // Valido la edición del revestimiento
     if ($resultado) {
         // Redirigir a la página de revestimientos
         header('Location: crud_revestimientos.php');

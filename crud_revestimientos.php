@@ -106,7 +106,7 @@ function obtener_revestimientos($conn)
                                     <a href="editar_revestimiento.php?id=<?php echo $revestimiento['id_revestimiento']; ?>" class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i> Editar
                                     </a>
-                                    <a href="eliminar_pedido.php?id=<?php echo $revestimiento['id_revestimiento']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este revestimiento?');">
+                                    <a href="eliminar_revestimiento.php?id=<?php echo $pedido['pedido_id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este revestimiento?');">
                                         <i class="fas fa-trash"></i> Eliminar
                                     </a>
                                 </td>
