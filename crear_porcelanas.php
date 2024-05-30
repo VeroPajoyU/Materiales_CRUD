@@ -97,7 +97,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="precio" class="form-label">Precio</label>
                     <input type="number" class="form-control" id="precio" name="precio" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Crear Porcelana</button>
+                <button type="submit" class="btn btn-success">Crear Porcelana</button>
+                <a href="crud_porcelanas.php" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i> Volver a Porcelanas
+                </a>
             </form>
         </div>
     </div>

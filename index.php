@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="container mt-5">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light">
                         <div class="container-fluid">
-                            <a class="navbar-brand" href="index.php">Gestión de Materiales de Construcción</a>
+                            <a class="navbar-brand" href="index.php">Gestionamiento de Materiales de Construcción</a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
@@ -108,6 +108,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="alert alert-success" role="alert">
                         Hola, <?php echo $_SESSION['nombre_usuario']; ?>. Has iniciado sesión correctamente.
                     </div>
+                    <h3 class="text-center">Bienvenido a nuestra página de Gestionamiento de Materiales de Construcción</h3>
+                    <!-- <img src="inicio.png" alt="" class="align-items-center"> -->
                 </div>
                 </div>
             <?php endif ; ?>

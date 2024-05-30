@@ -39,7 +39,7 @@
         <div class="container mt-5">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="index.php">Gestión de Materiales de Construcción</a>
+                    <a class="navbar-brand" href="index.php">Gestionamiento de Materiales de Construcción</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -65,7 +65,7 @@
             </nav>
             <div class="mt-4">
                 <section class="d-flex justify-content-center">
-                    <h1><strong>Porcelanas</strong></h1>
+                    <h1><strong>Gestión de Porcelanas</strong></h1>
                 </section>
                 <section class="d-flex justify-content-end">
                     <a href="crear_porcelanas.php" class="btn btn-success">
