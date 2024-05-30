@@ -11,26 +11,37 @@ if (!isset($_SESSION['id_usuario'])) {
 }
 
 $error = null;
+// Obtener el id por el método get
+$id_porcelana = $_GET['id'];
+
+// Identificación del porcelana a editar
+function obtener_porcelana($conn, $id_porcelana)
+{
+    //Consulta para obtener los datos del porcelana
+    $sql = "SELECT * FROM porcelana_sanitaria WHERE id_porcelana = $id_porcelana";
+    $resultado = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($resultado);
+}
 
 // Procesar el formulario si se ha enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
-    $nombre_revestimiento = $_POST['nombre_revestimiento'];
+    $nombre_porcelana = $_POST['nombre_porcelana'];
     $tipo = $_POST['tipo'];
     $precio = $_POST['precio'];
 
     // Insertar los datos en la base de datos
-    $sql = "INSERT INTO revestimientos (nombre_revestimiento, tipo, precio) VALUES ('$nombre_revestimiento', '$tipo', $precio)";
+    $sql = "UPDATE porcelana_sanitaria SET nombre_porcelana = '$nombre_porcelana', tipo = '$tipo', precio = $precio WHERE id_porcelana = $id_porcelana";
     $resultado = mysqli_query($conn, $sql);
 
-    // Valido la creación del revestimiento
+    // Valido la edición del porcelana
     if ($resultado) {
-        // Redirigir a la página de revestimientos
-        header('Location: crud_revestimientos.php');
+        // Redirigir a la página de porcelanas
+        header('Location: crud_porcelanas.php');
         exit;
     } else {
-        // Mostrar un mensaje de error si no se pudo crear el revestimiento
-        $error = 'Algo salió mal al crear el revestimiento';
+        // Mostrar un mensaje de error si no se pudo crear el porcelana
+        $error = 'Algo salió mal al crear el porcelana';
     }
 }
 ?>
@@ -41,11 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CREAR REVESTIMIENTO</title>
-    <!-- HOJAS DE ESTILO DE BOOTSTRAP 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- ICONOS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>EDITAR PORCELANAS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -71,14 +79,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <section class="d-flex justify-content-end">
                     <a href="cerrar_sesion.php" class="btn btn-danger btn-sm">
-                        <i class="fas fa-sign-out-alt"></i> Salir
+                        <i>Salir</i>
                     </a>
                 </section>
             </div>
         </nav>
         <div class="mt-4">
             <section class="d-flex justify-content-center">
-                <h1><strong>Crear Nuevo Revestimiento</strong></h1>
+                <h1><strong>Editar Porcelana</strong></h1>
             </section>
             <?php if ($error) : ?>
                 <!-- Mostrar mensaje de error si hay uno -->
@@ -86,32 +94,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php echo $error; ?>
                 </div>
             <?php endif; ?>
+            <?php
+            // Obtener los datos del porcelana
+            $porcelana = obtener_porcelana($conn, $id_porcelana);
+            ?>
             <hr>
             <form method="post">
                 <div class="mb-3">
-                    <label for="nombre_revestimiento" class="form-label">Nombre del revestimiento</label>
-                    <input type="text" class="form-control" id="nombre_revestimiento" name="nombre_revestimiento" required>
+                    <label for="nombre_porcelana" class="form-label">Nombre del porcelana</label>
+                    <input type="text" class="form-control" id="nombre_porcelana" name="nombre_porcelana" value="<?php echo htmlspecialchars($porcelana['nombre_porcelana']) ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="tipo" class="form-label">Tipo</label>
-                    <input type="text" class="form-control" id="tipo" name="tipo" required>
+                    <input type="text" class="form-control" id="tipo" name="tipo" value="<?php echo htmlspecialchars($porcelana['tipo']) ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="precio" class="form-label">Precio</label>
-                    <input type="number" class="form-control" id="precio" name="precio" required>
+                    <input type="number" class="form-control" id="precio" name="precio" value="<?php echo htmlspecialchars($porcelana['precio']) ?>" required>
                 </div>
-                <button type="submit" class="btn btn-success">Crear Revestimiento</button>
-                <a href="crud_revestimientos.php" class="btn btn-danger">
-                    <i class="fas fa-arrow-left"></i> Volver a Revestimientos
+                <button type="submit" class="btn btn-success">Editar Porcelana</button>
+                <a href="crud_porcelanas.php" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i> Volver a Porcelanas
                 </a>
             </form>
         </div>
     </div>
-    <!-- JS DE BOOTSTRAP 5 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <!-- ICONOS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 </body>
 
 </html>

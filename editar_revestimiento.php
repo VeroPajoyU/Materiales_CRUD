@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="number" class="form-control" id="precio" name="precio" value="<?php echo htmlspecialchars($revestimiento['precio']) ?>" required>
                 </div>
                 <button type="submit" class="btn btn-success">Editar Revestimiento</button>
-                <a href="crud_revestimientos.php" class="btn btn-danger">
+                <a href="crud_revestimientos.php" class="btn btn-primary">
                     <i class="fas fa-arrow-left"></i> Volver a Revestimientos
                 </a>
             </form>
