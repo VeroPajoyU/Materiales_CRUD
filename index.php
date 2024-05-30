@@ -108,8 +108,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="alert alert-success" role="alert">
                         Hola, <?php echo $_SESSION['nombre_usuario']; ?>. Has iniciado sesión correctamente.
                     </div>
-                    <h3 class="text-center">Bienvenido a nuestra página de Gestionamiento de Materiales de Construcción</h3>
-                    <!-- <img src="inicio.png" alt="" class="align-items-center"> -->
+                    <h4 class="text-center">Bienvenido <?php echo $_SESSION['nombre_usuario']; ?> a nuestra página de Gestionamiento de Materiales de Construcción</h4>
+                    <section class="d-flex justify-content-center">
+                        <img src="inicio.png" alt="" style="background-position: center; height: 70vh; width: 40%" class="d-bloc">
+                        <img src="inicio2.png" alt="" style="background-position: center; height: 70vh; width: 40%" class="d-bloc">
+                    </section>
                 </div>
                 </div>
             <?php endif ; ?>
